@@ -80,3 +80,37 @@ object Lab2 extends App:
 
   println("Expected '6!' with value a + !, a.ToString, a * 2, 3, result: " + composeThree((a: String) => a + "!", (a: Int) => a.toString, (a: Int) => a * 2)(3))
   println()
+
+  //Task 3
+  println("Task 3.7: recursion power")
+
+  def power (base: Double, exp: Int): Double = exp match
+    case 0.0 => 1.0
+    case _ => base * power(base, exp - 1)
+
+  println("Expected '8.0' with value 2 and 3, result: " + power(2, 3))
+  println("Expected '25.0' with value 2 and 3, result: " + power(5, 2))
+  println()
+
+  def tailPower (base: Double, exp: Int): Double =
+    @annotation.tailrec
+    def _pow(exp: Int, acc: Double): Double = exp match
+      case 0.0 => acc
+      case _ => _pow(exp - 1, base * acc)
+    _pow(exp, 1)
+
+  println("Expected '8.0' with value 2 and 3, result: " + tailPower(2, 3))
+  println("Expected '25.0' with value 2 and 3, result: " + tailPower(5, 2))
+  println()
+
+  println("Task 3.8: reverse function")
+
+  def reverseNumber (n: Int): Int =
+    @annotation.tailrec
+    def _rev(rem: Int, acc: Int, pow: Int): Int = rem match
+      case 0 => acc
+      case _ => _rev(rem / 10, acc + ((rem % 10) * pow), pow / 10)
+    _rev(n, 0, math.pow(10, floor(log10(n))).toInt)
+
+  println("Expected '54321' with value 12345, result: " + reverseNumber(12345))
+  println()
