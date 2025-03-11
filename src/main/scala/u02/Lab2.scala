@@ -44,7 +44,7 @@ object Lab2 extends App:
   //c: generic neg function
   println("c: generic neg function")
 
-  def genericNeg[A](predicate: A => Boolean): A => Boolean = (v: A) => !predicate(v)
+  def genericNeg[A] (predicate: A => Boolean): A => Boolean = (v: A) => !predicate(v)
 
   val isFive: Int => Boolean = _ == 5
   val isNotFive = genericNeg(isFive)
@@ -78,7 +78,7 @@ object Lab2 extends App:
   //Task 2.6
   println("Task 2.6: 3 functional compositions")
 
-  def composeThree[A, B, C, D](f: C => D, g: B => C, h: A => B): A => D = (x: A) => f(g(h(x)))
+  def composeThree[A, B, C, D] (f: C => D, g: B => C, h: A => B): A => D = (x: A) => f(g(h(x)))
 
   println("Expected '6!' with value a + !, a.ToString, a * 2, 3, result: " + composeThree((a: String) => a + "!", (a: Int) => a.toString, (a: Int) => a * 2)(3))
   println()
@@ -86,7 +86,7 @@ object Lab2 extends App:
   //Task 3
   println("Task 3.7: recursion power")
 
-  def power (base: Double, exp: Int): Double = exp match
+  def power(base: Double, exp: Int): Double = exp match
     case 0.0 => 1.0
     case _ => base * power(base, exp - 1)
 
@@ -94,7 +94,7 @@ object Lab2 extends App:
   println("Expected '25.0' with value 2 and 3, result: " + power(5, 2))
   println()
 
-  def tailPower (base: Double, exp: Int): Double =
+  def tailPower(base: Double, exp: Int): Double =
     @annotation.tailrec
     def _pow(exp: Int, acc: Double): Double = exp match
       case 0.0 => acc
@@ -107,7 +107,7 @@ object Lab2 extends App:
 
   println("Task 3.8: reverse function")
 
-  def reverseNumber (n: Int): Int =
+  def reverseNumber(n: Int): Int =
     @annotation.tailrec
     def _rev(rem: Int, acc: Int, pow: Int): Int = rem match
       case 0 => acc
