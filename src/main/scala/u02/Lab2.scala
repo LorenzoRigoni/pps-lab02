@@ -1,5 +1,7 @@
 package u02
 
+import u02.Lab2.Expr.{Add, Literal}
+
 import scala.math.*
 
 object Lab2 extends App:
@@ -114,3 +116,23 @@ object Lab2 extends App:
 
   println("Expected '54321' with value 12345, result: " + reverseNumber(12345))
   println()
+
+  //Task 4
+  println("Task 4.9: sum types")
+
+  enum Expr:
+    case Literal (const: Int)
+    case Add (exp1: Expr, exp2: Expr)
+    case Multiply (exp1: Expr, exp2: Expr)
+
+  def evaluate(expr: Expr): Int = expr match
+    case Expr.Literal(e) => e
+    case Expr.Add(e1, e2) => evaluate(e1) + evaluate(e2)
+    case Expr.Multiply(e1, e2) => evaluate(e1) * evaluate(e2)
+
+  def show (expr: Expr): String = expr match
+    case Expr.Literal(e) => e.toString
+    case Expr.Add(e1, e2) => "(" + show(e1) + " + " + show(e2) + ")"
+    case Expr.Multiply(e1, e2) => "(" + show(e1) + " * " + show(e2) + ")"
+
+  //In test/scala/u02 you can find the tests about Expr
